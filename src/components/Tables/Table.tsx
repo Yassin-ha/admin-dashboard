@@ -12,7 +12,7 @@ import {
 interface TableProps<T extends object> {
   columns: Column<T>[];
   data: T[];
-  globalFilter: string;
+  globalFilter: string | number;
 }
 
 const Table = <T extends object>({
@@ -49,6 +49,7 @@ const Table = <T extends object>({
   React.useEffect(() => {
     setGlobalFilter(globalFilter);
   }, [globalFilter, setGlobalFilter]);
+
 
   return (
     <>

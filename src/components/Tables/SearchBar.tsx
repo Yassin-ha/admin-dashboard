@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react";
 
 interface SearchBarProps {
-    onSearch: (query: string) => void;
+    onSearch: (query: string | number) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {

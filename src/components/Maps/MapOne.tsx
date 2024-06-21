@@ -1,54 +1,43 @@
-import jsVectorMap from 'jsvectormap';
-import 'jsvectormap/dist/css/jsvectormap.css';
-import { useEffect } from 'react';
-import '../../js/us-aea-en';
+import React, { useState } from "react";
+import Map from "./Map";
+import CarIcon from "../../images/icon/car.png"
+import TruckIcon from "../../images/icon/cargo-truck.png"
+import BikeIcon from "../../images/icon/motorcycle.png"
 
-const MapOne = () => {
-  useEffect(() => {
-    const mapOne = new jsVectorMap({
-      selector: '#mapOne',
-      map: 'us_aea_en',
-      zoomButtons: true,
+type LocationType = "car" | "bike" | "truck";
 
-      regionStyle: {
-        initial: {
-          fill: '#C8D0D8',
-        },
-        hover: {
-          fillOpacity: 1,
-          fill: '#3056D3',
-        },
-      },
-      regionLabelStyle: {
-        initial: {
-          fontFamily: 'Satoshi',
-          fontWeight: 'semibold',
-          fill: '#fff',
-        },
-        hover: {
-          cursor: 'pointer',
-        },
-      },
+interface Location {
+    id: number;
+    position: [number, number];
+    type: LocationType;
+    name: string;
+}
 
-      labels: {
-        regions: {
-          render(code: string) {
-            return code.split('-')[1];
-          },
-        },
-      },
-    });
-    mapOne;
-  });
+const initialLocations: Location[] = [
+    { id: 1, position: [31.6295, -7.9811], type: "car", name: "Car 1" },
+    { id: 2, position: [34.020882, -6.84165], type: "bike", name: "Bike 1" },
+    { id: 3, position: [33.5731, -7.5898], type: "truck", name: "truck 1" },
+];
 
-  return (
-    <div className="col-span-12 rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-7">
-      <h4 className="mb-2 text-xl font-semibold text-black dark:text-white">
-        Region labels
-      </h4>
-      <div id="mapOne" className="mapOne map-btn h-90"></div>
-    </div>
-  );
+const App: React.FC = () => {
+    const [locations, setLocations] = useState<Location[]>(initialLocations);
+
+    const iconUrls: Record<LocationType, string> = {
+        car: CarIcon,
+        bike: BikeIcon,
+        truck: TruckIcon,
+    };
+
+    return (
+        <div className="w-full col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
+            <Map
+                locations={locations}
+                iconUrls={iconUrls}
+                center={[31.7917, -7.0926]}
+                zoom={6}
+            />
+        </div>
+    );
 };
 
-export default MapOne;
+export default App;
