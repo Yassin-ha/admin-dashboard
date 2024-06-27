@@ -3,8 +3,10 @@ import Table from './Table';
 import SearchBar from './SearchBar';
 import { Column } from 'react-table';
 import { BsWallet2 } from "react-icons/bs";
+import { Link } from 'react-router-dom';
 
 interface Data {
+  id: string;
   'اسم الكامل': string;
   'الرصيد': number;
   'رقم هاتف ': number;
@@ -19,6 +21,7 @@ interface Data {
 const TableOne: React.FC = () => {
   const initialData: Data[] = [
     {
+      id: "Abbb555",
       'اسم الكامل': 'ahmed',
       'الرصيد': 100,
       'رقم هاتف ': 2126778855,
@@ -57,12 +60,18 @@ const TableOne: React.FC = () => {
         Header: 'Actions',
         accessor: 'actions',
         Cell: ({ row }: { row: { original: Data } }) => (
-          <div className='flex flex-col justify-center items-center'>
+          <div className='flex gap-1 flex-col justify-center items-center'>
             <div className='flex gap-2'>
-            <button onClick={() => handleEdit(row.original)}>Edit</button>
-            <button onClick={() => handleBalanceEdit(row.original)}><BsWallet2 /></button>
+              <button onClick={() => handleDelete(row.original)}>Delete</button>
+              <button onClick={() => handleEdit(row.original)}>Edit</button>
+              <button onClick={() => handleBalanceEdit(row.original)}><BsWallet2 /></button>
+
             </div>
-            <button onClick={() => handleDelete(row.original)}>Delete</button>
+            <div className='flex'>
+              <Link className=' dark:bg-white bg-boxdark text-white dark:text-black px-1 rounded-md' to={`/RiderDetails/${row.original['رقم اطلب']}`}>
+                عرض المزيد
+              </Link>
+            </div>
           </div>
         ),
       },

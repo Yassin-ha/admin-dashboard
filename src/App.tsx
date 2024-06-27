@@ -4,15 +4,14 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import Loader from './common/Loader';
 import PageTitle from './components/PageTitle';
 import ECommerce from './pages/Dashboard/ECommerce';
-import FormElements from './pages/Form/FormElements';
-import FormLayout from './pages/Form/FormLayout';
 import Settings from './pages/Settings';
 import Tables from './pages/Tables';
-import Alerts from './pages/UiElements/Alerts';
-import Buttons from './pages/UiElements/Buttons';
 import Login from './pages/Login';
 import SpecialCases from './pages/SpecialCases';
 import OrderDetails from './pages/OrderDetails';
+import CanceledOrderDetails from './pages/CanceledOrderDetails';
+import RiderDetails from './pages/RiderDetails';
+import CommercialActivityDetails from './pages/CommercialActivityDetails';
 
 
 function App() {
@@ -36,7 +35,7 @@ function App() {
           path='/'
           element={
             <>
-              <PageTitle title="eCommerce Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Home Page" />
               <ECommerce />
             </>
           }
@@ -45,26 +44,8 @@ function App() {
           path='/login'
           element={
             <>
-              <PageTitle title="Login" />
+              <PageTitle title="Login Page" />
               <Login />
-            </>
-          }
-        />
-        <Route
-          path="/forms/form-elements"
-          element={
-            <>
-              <PageTitle title="Form Elements | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <FormElements />
-            </>
-          }
-        />
-        <Route
-          path="/forms/form-layout"
-          element={
-            <>
-              <PageTitle title="Form Layout | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <FormLayout />
             </>
           }
         />
@@ -72,6 +53,7 @@ function App() {
           path="/specialCases"
           element={
             <>
+              <PageTitle title='Special Cases Page' />
               <SpecialCases />
             </>
           }
@@ -80,6 +62,7 @@ function App() {
           path="/tables"
           element={
             <>
+              <PageTitle title='Tables Page' />
               <Tables />
             </>
           }
@@ -88,8 +71,35 @@ function App() {
           path="/order/:id"
           element={
             <>
-              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Order Page" />
               <OrderDetails />
+            </>
+          }
+        />
+        <Route
+          path="/CanceledOrder/:id"
+          element={
+            <>
+              <PageTitle title="Canceled Order Page" />
+              <CanceledOrderDetails />
+            </>
+          }
+        />
+        <Route
+          path="/RiderDetails/:id"
+          element={
+            <>
+              <PageTitle title="Rider Details Page" />
+              <RiderDetails />
+            </>
+          }
+        />
+        <Route
+          path="/CommercialActivityDetails/:id"
+          element={
+            <>
+              <PageTitle title="Commercial Activity Details Page" />
+              <CommercialActivityDetails />
             </>
           }
         />
@@ -97,26 +107,8 @@ function App() {
           path="/settings"
           element={
             <>
-              <PageTitle title="Settings | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Settings Page" />
               <Settings />
-            </>
-          }
-        />
-        <Route
-          path="/ui/alerts"
-          element={
-            <>
-              <PageTitle title="Alerts | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Alerts />
-            </>
-          }
-        />
-        <Route
-          path="/ui/buttons"
-          element={
-            <>
-              <PageTitle title="Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Buttons />
             </>
           }
         />

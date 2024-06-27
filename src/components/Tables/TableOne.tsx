@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Table from './Table';
 import SearchBar from './SearchBar';
 import { Column } from 'react-table';
+import { Link } from 'react-router-dom';
 
 interface Data {
     'رقم اطلب': number;
@@ -130,10 +131,18 @@ const TableOne: React.FC = () => {
                 Header: 'Actions',
                 accessor: 'actions',
                 Cell: ({ row }: { row: { original: Data } }) => (
-                    <>
-                        <button onClick={() => handleEdit(row.original)}>Edit</button>
-                        <button onClick={() => handleDelete(row.original)}>Delete</button>
-                    </>
+                    <div className='flex gap-1 flex-col justify-center items-center'>
+                        <div className=' flex gap-2'>
+                            <button onClick={() => handleEdit(row.original)}>Edit</button>
+                            <button onClick={() => handleDelete(row.original)}>Delete</button>
+
+                        </div>
+                        <div className='flex'>
+                            <Link className=' dark:bg-white bg-boxdark text-white dark:text-black px-1 rounded-md' to={`/order/${row.original['رقم اطلب']}`}>
+                                عرض المزيد
+                            </Link>
+                        </div>
+                    </div>
                 ),
             },
         ],

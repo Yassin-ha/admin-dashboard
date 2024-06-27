@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import Table from './Table';
 import SearchBar from './SearchBar';
 import { Column } from 'react-table';
+import { Link } from 'react-router-dom';
 
 interface Data {
+  "رقم النشاط": string;
   'اسم النشاط': string;
   'رقم هاتف النشاط': number;
   ' العنوان': string;
@@ -14,6 +16,7 @@ interface Data {
 const TableOne: React.FC = () => {
   const initialData: Data[] = [
     {
+      "رقم النشاط": "11",
       'اسم النشاط': 'pizza',
       'رقم هاتف النشاط': 2125445533,
       ' العنوان': 'agadir ...',
@@ -48,10 +51,16 @@ const TableOne: React.FC = () => {
         Header: 'Actions',
         accessor: 'actions',
         Cell: ({ row }: { row: { original: Data } }) => (
-            <div className='flex flex-col justify-center items-center'>
+            <div className='flex flex-col justify-center gap-1 items-center'>
+              <div className='flex gap-2'>
                 <button onClick={() => handleEdit(row.original)}>Edit</button>
                 <button onClick={() => handleDelete(row.original)}>Delete</button>
+              </div>
+                <Link className=' dark:bg-white bg-boxdark text-white dark:text-black py-[2px] px-1 rounded-md' to={`/CommercialActivityDetails/${row.original["رقم النشاط"]}`}>
+                عرض المزيد
+              </Link>
             </div>
+
         ),
     },
     ],
@@ -67,10 +76,10 @@ const TableOne: React.FC = () => {
     setQuery(searchQuery);
   };
 
-  const handleToggleStatus = (rider: Data) => {
+  const handleToggleStatus = (commercial: Data) => {
     setData((prevData) =>
       prevData.map((r) =>
-        r['رقم اطلب'] === rider['رقم اطلب']
+        r["رقم النشاط"] === commercial["رقم النشاط"]
           ? {
             ...r,
             status: !r.status,
@@ -80,14 +89,14 @@ const TableOne: React.FC = () => {
       ),
     );
   };
-  const handleEdit = (rider: Data) => {
-    setEditingRow(rider);
-    setFormData(rider);
+  const handleEdit = (commercial: Data) => {
+    setEditingRow(commercial);
+    setFormData(commercial);
   };
 
   const handleDelete = (data: Data) => {
     setData((prevData) =>
-      prevData.filter((r) => r['رقم اطلب'] !== data['رقم اطلب']),
+      prevData.filter((r) => r["رقم النشاط"] !== data["رقم النشاط"]),
     );
   };
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,7 +110,7 @@ const TableOne: React.FC = () => {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setData(prevData =>
-      prevData.map(r => r['رقم اطلب'] === formData!['رقم اطلب'] ? formData! : r)
+      prevData.map(r => r["رقم النشاط"] === formData!["رقم النشاط"] ? formData! : r)
     );
     setEditingRow(null);
     setFormData(null);

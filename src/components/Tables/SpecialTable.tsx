@@ -49,7 +49,7 @@ const TableOne: React.FC = () => {
                 Header: 'Actions',
                 accessor: 'actions',
                 Cell: ({ row }) => (
-                    <Link className=' dark:bg-white bg-boxdark text-white dark:text-black py-2 px-1 rounded-md' to={`/order/${row.original['رقم اطلب']}`}>
+                    <Link className=' dark:bg-white bg-boxdark text-white dark:text-black py-2 px-1 rounded-md' to={`/CanceledOrder/${row.original['رقم اطلب']}`}>
                         عرض المزيد
                     </Link>
                 ),
